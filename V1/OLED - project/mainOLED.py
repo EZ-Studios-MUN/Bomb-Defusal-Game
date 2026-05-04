@@ -25,15 +25,15 @@ def main():
         time.sleep(0.1)
         driver.ser.reset_input_buffer()
 
-        print(f"[WAITING] Pulse Pin {SIGNAL_IN} HIGH to start...")
-        consecutive_highs = 0
-        while consecutive_highs <= 7:
-            if driver.digital_read(SIGNAL_IN) or driver.digital_read(RESULT_LED):
-                consecutive_highs += 1
-                print(f"Signal detected... ({consecutive_highs}/5)")
-            else:
-                consecutive_highs = 0
-            time.sleep(0.02)
+        # print(f"[WAITING] Pulse Pin {SIGNAL_IN} HIGH to start...")
+        # consecutive_highs = 0
+        # while consecutive_highs <= 7:
+        #     if driver.digital_read(SIGNAL_IN) or driver.digital_read(RESULT_LED):
+        #         consecutive_highs += 1
+        #         print(f"Signal detected... ({consecutive_highs}/5)")
+        #     else:
+        #         consecutive_highs = 0
+        #     time.sleep(0.02)
 
         print("[START] Valid signal confirmed. Triggering Relay.")
         driver.digital_write(RELAY_PIN, 0) # Activate Relay (Active Low)
@@ -43,6 +43,7 @@ def main():
         overall_winner = False
 
         print("[GAME 1] Running Maze...")
+        # maze_result = "win"
         maze_result = MazeGame(driver).run()
         
         if str(maze_result).strip().lower() == "win":

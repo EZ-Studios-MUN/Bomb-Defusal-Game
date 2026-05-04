@@ -15,7 +15,7 @@ PASSWORD_RELAY = 6
 MORSE_RELAY = 7
 PARTNER_SIGNAL = 16
 
-Simon_rounds = 4
+Simon_rounds = 0
 
 WIN = "WIN"
 LOSE = "LOSE"
@@ -224,17 +224,17 @@ async def main():
         await clear_password_inputs()
 
         print("\n[SYSTEM] Running Passwords")
-        password_game = Passwords(8, 9, 10)
+        # password_game = Passwords(8, 9, 10)
 
-        password_result = await run_with_bomb_watch(
-            password_game.main(),
-            game_state
-        )
+        # password_result = await run_with_bomb_watch(
+        #     password_game.main(),
+        #     game_state
+        # )
 
-        if password_result != WIN:
-            print("[SYSTEM] BOOM - Passwords failed")
-            await bomb_explode_melody()
-            return
+        # if password_result != WIN:
+        #     print("[SYSTEM] BOOM - Passwords failed")
+        #     await bomb_explode_melody()
+        #     return
 
         print("[PASSWORD] Solved")
 
@@ -252,34 +252,34 @@ async def main():
         digital_write(10, False)
         await asyncio.sleep(0.2)
 
-        morse_game = MorseCode(11, 12, 10)
-        game_state["mute_timer_beep"] = True
-        morse_game.start(0)
+        # morse_game = MorseCode(11, 12, 10)
+        # game_state["mute_timer_beep"] = True
+        # morse_game.start(0)
 
-        morse_result = await run_with_bomb_watch(
-            morse_game.main(),
-            game_state
-        )
+        # morse_result = await run_with_bomb_watch(
+        #     morse_game.main(),
+        #     game_state
+        # )
 
-        if morse_result != WIN:
-            print("[SYSTEM] BOOM - Morse failed")
-            await bomb_explode_melody()
-            return
+        # if morse_result != WIN:
+        #     print("[SYSTEM] BOOM - Morse failed")
+        #     await bomb_explode_melody()
+        #     return
 
-        game_state["mute_timer_beep"] = False
-        print("[MORSE] Solved")
+        # game_state["mute_timer_beep"] = False
+        # print("[MORSE] Solved")
 
 
 
         # =====================================
         # PARTNER BOARD
         # =====================================
-        print("\n[SYSTEM] Starting partner board")
-        await set_relay(MORSE_RELAY, True)
+        # print("\n[SYSTEM] Starting partner board")
+        # await set_relay(MORSE_RELAY, True)
 
-        digital_write(PARTNER_SIGNAL, True)
-        await asyncio.sleep(3)
-        digital_write(PARTNER_SIGNAL, False)
+        # digital_write(PARTNER_SIGNAL, True)
+        # await asyncio.sleep(3)
+        # digital_write(PARTNER_SIGNAL, False)
 
         partner_result = await run_with_bomb_watch(
             wait_for_partner_result(),
